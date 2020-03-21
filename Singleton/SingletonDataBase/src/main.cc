@@ -7,6 +7,6 @@ int main()
     vector<string> list = {"Tokyo", "Osaka"}; 
     for (auto city: list) 
         cout << city << " "
-        << SingletonDatabase::get().get_population(city) << endl;
+        << SingletonDatabase::get().getPopulation(city) << endl;
     return 0;
 }

@@ -9,7 +9,7 @@
 class Database
 {
 public:
-    virtual int get_population(const std::string& name) = 0;
+    virtual int getPopulation(const std::string& name) = 0;
 };
 
 class SingletonDatabase : public Database
@@ -40,8 +40,58 @@ public:
         return db;
     }
     
-    int get_population(const std::string& name) override
+    int getPopulation(const std::string& name) override
     {
         return capitals[name];
+    }
+};
+
+class DummyDatabase: public Database
+{
+    std::map<std::string, int> capitals;
+public:
+    DummyDatabase()
+    {
+        capitals["alpha"] = 120;
+        capitals["beta"] = 120;
+        capitals["gamma"] = 120;
+    }
+    
+    int getPopulation(const std::string& name)
+    {
+        return capitals[name];
+    }
+};
+
+struct SingletonRecorderFinder
+{
+    int totalPopulation(std::vector<std::string> names)
+    {
+        int result = 0;
+        for (auto& name: names)
+            result += SingletonDatabase::get().getPopulation(name);
+        return result;
+    }
+};
+
+/*!
+ * We can move singleton::get() out of the recordfinder
+ * dependency inversion
+ */
+struct ConifgurableRecordFinder
+{
+    Database& db;
+
+    explicit ConifgurableRecordFinder(Database& db)
+        :db(db)
+    {
+    }
+
+    int totalPopulation(std::vector<std::string>& names)
+    {
+        int result = 0;
+        for (auto& name: names)
+            result += db.getPopulation(name);
+        return result;
     }
 };
