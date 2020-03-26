@@ -11,7 +11,7 @@ using namespace flyweights;
 
 // coloring in the console by-letter vs using ranges
 
-// boost.flyweight  
+// boost.flyweight
 
 // naive
 typedef uint32_t key;
@@ -100,7 +100,7 @@ void boost_flyweight()
     User2 john_doe{ "John", "Doe" };
     User2 jane_doe{ "Jane", "Doe" };
 
-    
+
     cout << boolalpha <<  (&jane_doe.last_name.get() == &john_doe.last_name.get());
     //cout << (&jane_doe.last_name == &john_doe.last_name);
 }
