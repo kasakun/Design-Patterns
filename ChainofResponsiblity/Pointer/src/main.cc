@@ -94,7 +94,7 @@ public:
  * The chain is like:
  * xxxModifier::handle() -> baseModifier::handle() -> if(next) next->handle
  *
- * This is kind of old style of COB
+ * This is kind of old style of COR
  */
 int main()
 {
